@@ -1,14 +1,8 @@
-# Default backend is httpcloak. On some Windows setups it fails with a
-# permission error during session init. If you hit that, switch to
-# curl_cffi by changing the line below.
+"""
+Backward-compatibility adapter for build_session.
+"""
+from __future__ import annotations
 
-USE_CURL_CFFI = False # set True if httpcloak throws a permission error
+from backend.integrations.naukri.session import build_session
 
-
-def build_session():
-    if USE_CURL_CFFI:
-        from curl_cffi import requests
-        return requests.Session(impersonate="chrome124", timeout=30)
-
-    import httpcloak
-    return httpcloak.Session(preset="chrome-latest", timeout=30)
+USE_CURL_CFFI = False

@@ -1,126 +1,61 @@
 """
-telegram_alert.py — Fire-and-forget Telegram notifications for NopeRi.
-
-Uses the raw Bot API over requests (no extra library needed).
-Activated only when both TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID are set in .env,
-AND config.json has  telegram.enabled = true.
-
-Silence individual alert types in config.json under telegram.alerts.
+telegram_alert.py — Telegram Notification dispatch module for NopeRi.
+Provides backward-compatible functional interface backed by backend.integrations.telegram.TelegramClient.
 """
 from __future__ import annotations
 
-import os
-import logging
-from datetime import datetime
+import sys
+from pathlib import Path
+from typing import List, Optional
 
-import requests
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
-logger = logging.getLogger(__name__)
+from backend.integrations.telegram.client import TelegramClient
 
-# ---------------------------------------------------------------------------
-# Internal helpers
-# ---------------------------------------------------------------------------
-
-def _bot_token() -> str:
-    return os.getenv("TELEGRAM_BOT_TOKEN", "")
-
-def _chat_id() -> str:
-    return os.getenv("TELEGRAM_CHAT_ID", "")
-
-def _is_ready() -> bool:
-    return bool(_bot_token() and _chat_id())
+_client = TelegramClient()
 
 
 def send(text: str) -> bool:
-    """
-    Send a Markdown message to the configured Telegram chat.
-    Returns True on success, False on any failure (never raises).
-    """
-    if not _is_ready():
-        return False
-    try:
-        res = requests.post(
-            f"https://api.telegram.org/bot{_bot_token()}/sendMessage",
-            json={
-                "chat_id":    _chat_id(),
-                "text":       text,
-                "parse_mode": "Markdown",
-            },
-            timeout=10,
-        )
-        if not res.ok:
-            logger.debug("Telegram send failed: %s %s", res.status_code, res.text[:100])
-        return res.ok
-    except Exception as exc:
-        logger.debug("Telegram send error: %s", exc)
-        return False
+    return _client.send(text)
 
-
-# ---------------------------------------------------------------------------
-# Typed alert helpers  — import and call these from your code
-# ---------------------------------------------------------------------------
 
 def alert_run_started(mode: str = "manual") -> bool:
-    ts = datetime.now().strftime("%d %b %Y  %H:%M")
-    return send(f"🚀 *NopeRi started* `[{mode}]`\n_{ts}_")
+    return _client.alert_run_started(mode)
 
 
-def alert_apply(job_title: str, company: str, score: int | None, job_id: str) -> bool:
-    score_str = f"{score}/100" if score is not None else "?"
-    return send(
-        f"✅ *Applied*\n"
-        f"*{job_title}*\n"
-        f"_{company}_\n"
-        f"Score: `{score_str}`  |  ID: `{job_id}`"
-    )
+def alert_apply(job_title: str, company: str, score: Optional[int], job_id: str) -> bool:
+    return _client.alert_apply(job_title, company, score, job_id)
 
 
 def alert_failed(job_title: str, company: str, error: str) -> bool:
-    return send(
-        f"❌ *Apply failed*\n"
-        f"*{job_title}*  _{company}_\n"
-        f"`{str(error)[:200]}`"
-    )
+    return _client.alert_failed(job_title, company, error)
 
 
 def alert_questionnaire(job_title: str, company: str) -> bool:
-    return send(
-        f"📝 *Questionnaire handled*\n"
-        f"*{job_title}*  _{company}_"
-    )
+    return _client.alert_questionnaire(job_title, company)
 
 
 def alert_run_summary(
-    total_found:  int,
-    applied:      int,
-    skipped_ext:  int,
-    skipped_dup:  int,
-    failed:       int,
+    total_found: int,
+    applied: int,
+    skipped_ext: int,
+    skipped_dup: int,
+    failed: int,
 ) -> bool:
-    ts = datetime.now().strftime("%d %b  %H:%M")
-    return send(
-        f"📊 *Run Summary*  _{ts}_\n"
-        f"Found `{total_found}` jobs\n"
-        f"✅ Applied: `{applied}`\n"
-        f"⏭ Skipped ext: `{skipped_ext}`  |  dup: `{skipped_dup}`\n"
-        f"❌ Failed: `{failed}`"
-    )
+    return _client.alert_run_summary(total_found, applied, skipped_ext, skipped_dup, failed)
 
 
 def alert_profile_updated(headline: str = "") -> bool:
-    ts   = datetime.now().strftime("%d %b  %H:%M")
-    body = f"\n_{headline}_" if headline else ""
-    return send(f"👤 *Profile updated*  _{ts}_{body}")
+    return _client.alert_profile_updated(headline)
 
 
 def alert_error(message: str) -> bool:
-    return send(f"🚨 *NopeRi error*\n`{str(message)[:300]}`")
+    return _client.alert_error(message)
 
 
-def alert_scheduler_started(job_names: list[str]) -> bool:
-    jobs_str = "\n".join(f"  • {n}" for n in job_names)
-    return send(f"🕐 *Scheduler running*\n{jobs_str}")
+def alert_scheduler_started(job_names: List[str]) -> bool:
+    return _client.alert_scheduler_started(job_names)
 
 
 def alert_scheduler_stopped() -> bool:
-    return send("⏹ *Scheduler stopped*")
+    return _client.alert_scheduler_stopped()

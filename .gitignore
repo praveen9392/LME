@@ -1,14 +1,13 @@
 # Research / personal notes
 learning.md
 
-# AI scoring prompt (tracked in git — edit to tune scoring behaviour)
-# user_prompt.md
-
-# Env files
+# Env files & credentials
 .env
 .env.*
+.session.json
+.session_cache.json
 
-# NopeRi runtime data
+# Runtime data & state
 config.json
 veto.json
 applied_jobs.db
@@ -18,10 +17,12 @@ qa_cache.json
 nkparams.db
 nkPool.txt
 
-# Python cache
+# Python cache & bytecode
 __pycache__/
 *.py[cod]
 *$py.class
+*.pytest_cache/
+.pytest_cache/
 
 # Virtual environment
 venv/
@@ -30,8 +31,9 @@ venv/
 
 # Logs
 *.log
+logs/
 
-# OS files
+# Operating System files
 .DS_Store
 Thumbs.db
 
@@ -44,6 +46,6 @@ build/
 dist/
 *.egg-info/
 
-# Coverage (optional)
+# Coverage
 .coverage
 htmlcov/
