@@ -32,6 +32,7 @@ venv/
 # Logs
 *.log
 logs/
+backend/logs/
 
 # Operating System files
 .DS_Store

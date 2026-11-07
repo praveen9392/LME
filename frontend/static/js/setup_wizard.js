@@ -274,7 +274,7 @@ function updateCronLine() {
   const cwd = serverEnv.cwd || "/path/to/LME";
   const py = serverEnv.python || "python3";
   document.getElementById("cron-code").textContent =
-    `${m || 0} ${h || 8} * * ${dExpr} cd "${cwd}" && "${py}" apply_agent.py >> "${cwd}/logs/noperi.log" 2>&1`;
+    `${m || 0} ${h || 8} * * ${dExpr} cd "${cwd}" && "${py}" apply_agent.py >> "${cwd}/backend/logs/noperi.log" 2>&1`;
 }
 
 function initQA() {

@@ -141,28 +141,16 @@ LME/
 │   ├── templates/                 # Clean HTML templates
 │   │   ├── setup_wizard.html      # 5-step browser setup wizard
 │   │   └── dashboard.html         # Visual analytics dashboard with Chart.js
-│   └── static/                    # CSS, JS, Assets
-│       ├── css/
-│       │   └── style.css          # Design system & dark mode tokens
-│       └── js/
-│           ├── setup_wizard.js    # Multi-step wizard frontend controller
-│           └── dashboard.js       # Chart.js initialization & data rendering
+│   ├── static/                    # CSS, JS, Assets
+│   │   ├── css/
+│   │   │   └── style.css          # Design system & dark mode tokens
+│   │   └── js/
+│   │       ├── setup_wizard.js    # Multi-step wizard frontend controller
+│   │       └── dashboard.js       # Chart.js initialization & data rendering
+│   └── tests/                     # Frontend Playwright E2E browser tests
+│       └── test_playwright_e2e.py # Automated browser test suite
 │
-├── cron/                          # Backward-compatibility shims
-│   ├── __init__.py
-│   ├── scheduler.py
-│   ├── profile_updater.py
-│   └── telegram_alert.py
-│
-├── src/                           # Backward-compatibility import shims
-│   ├── client/
-│   ├── config/
-│   ├── exceptions/
-│   ├── models/
-│   └── utils/
-│
-├── tests/                         # Comprehensive Automated Test Suite
-│   ├── __init__.py
+├── backend/tests/                 # Comprehensive Backend Automated Test Suite (36 tests)
 │   ├── unit/                      # Unit tests (offline, fast, mocked)
 │   │   ├── test_config.py
 │   │   ├── test_crypto.py
@@ -175,7 +163,7 @@ LME/
 │       ├── test_questionnaire.py
 │       └── test_web_server.py
 │
-├── logs/                          # Rotating log files (gitignored)
+├── backend/logs/                  # Rotating log files (backend/logs/noperi.log)
 │   └── noperi.log
 │
 └── docs/                          # Architecture & Audit Documentation
