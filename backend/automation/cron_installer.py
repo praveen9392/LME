@@ -17,7 +17,7 @@ logger = get_logger(__name__)
 
 def install_crontab(cron_line: str) -> Tuple[bool, str]:
     """
-    Installs or updates a NopeRi cron entry in the user's crontab on Linux/macOS.
+    Installs or updates an LME cron entry in the user's crontab on Linux/macOS.
     Returns (success: bool, message: str).
     """
     if sys.platform not in ("linux", "darwin") and not sys.platform.startswith("linux"):
@@ -35,7 +35,7 @@ def install_crontab(cron_line: str) -> Tuple[bool, str]:
             text=True,
         ).stdout or ""
 
-        # Remove any previous NopeRi apply_agent entries to prevent duplication
+        # Remove any previous LME apply_agent entries to prevent duplication
         clean_lines = [
             line for line in existing.splitlines()
             if "apply_agent.py" not in line and line.strip()

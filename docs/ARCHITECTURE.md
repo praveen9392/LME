@@ -163,8 +163,8 @@ LME/
 │       ├── test_questionnaire.py
 │       └── test_web_server.py
 │
-├── backend/logs/                  # Rotating log files (backend/logs/noperi.log)
-│   └── noperi.log
+├── backend/logs/                  # Rotating log files (backend/logs/app.log)
+│   └── app.log
 │
 └── docs/                          # Architecture & Audit Documentation
     ├── REVERSE_ENGINEERING.md
@@ -193,7 +193,7 @@ LME/
   - API keys (`sk-or-v1-...`, `sk-...`, Telegram Bot tokens)
 - Handlers:
   - Console `StreamHandler` with clean ANSI formatting.
-  - Rotating `RotatingFileHandler` writing to `logs/noperi.log` (5 MB max, 5 backup files).
+  - Rotating `RotatingFileHandler` writing to `backend/logs/app.log` (5 MB max, 5 backup files).
 
 ### 4.3 Deduplication & Persistence Layer (`backend/storage/applied_jobs_repo.py`)
 - Primary key: 16-character SHA-256 hash of `job_id|company.lower().strip()`.

@@ -1,1 +1,1 @@
-"""NopeRi / Naukri Job Automation Backend Package."""
+"""LME / Naukri Job Automation Backend Package."""

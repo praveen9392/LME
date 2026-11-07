@@ -31,7 +31,7 @@ def run_web_server(port: int = DEFAULT_PORT, target_path: str = "/setup", block_
 
     url = f"http://{BIND_HOST}:{port}{target_path}"
     logger.info("Local Web Server running at %s", url)
-    print(f"\n  NopeRi Web UI -> opening {url}")
+    print(f"\n  LME Web UI -> opening {url}")
     print("  Complete setup or review dashboard in your browser.\n")
 
     try:

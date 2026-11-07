@@ -19,7 +19,7 @@ except ImportError:
     HAS_COLORAMA = False
 
 DEFAULT_LOG_DIR = Path("backend") / "logs" if Path("backend").exists() else Path("logs")
-DEFAULT_LOG_FILE = DEFAULT_LOG_DIR / "noperi.log"
+DEFAULT_LOG_FILE = DEFAULT_LOG_DIR / "app.log"
 LOG_FORMAT = "%(asctime)s | %(levelname)-8s | [%(name)s:%(funcName)s] %(message)s"
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 

@@ -53,7 +53,7 @@ class TelegramClient:
 
     def alert_run_started(self, mode: str = "manual") -> bool:
         ts = datetime.now().strftime("%d %b %Y %H:%M")
-        return self.send(f"🚀 *NopeRi started* `[{mode}]`\n_{ts}_")
+        return self.send(f"🚀 *LME started* `[{mode}]`\n_{ts}_")
 
     def alert_apply(self, job_title: str, company: str, score: Optional[int], job_id: str) -> bool:
         score_str = f"{score}/100" if score is not None else "?"
@@ -100,7 +100,7 @@ class TelegramClient:
         return self.send(f"👤 *Profile updated* _{ts}_{body}")
 
     def alert_error(self, message: str) -> bool:
-        return self.send(f"🚨 *NopeRi error*\n`{str(message)[:300]}`")
+        return self.send(f"🚨 *LME error*\n`{str(message)[:300]}`")
 
     def alert_scheduler_started(self, job_names: List[str]) -> bool:
         jobs_str = "\n".join(f"  • {n}" for n in job_names)

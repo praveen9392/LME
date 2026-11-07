@@ -1,5 +1,5 @@
 """
-apply_agent.py — NopeRi automated Naukri job application agent.
+apply_agent.py — LME automated Naukri job application agent.
 
 Usage:
   python apply_agent.py                     normal run
@@ -45,7 +45,7 @@ logger = get_logger(__name__)
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         prog="apply_agent",
-        description="NopeRi — Naukri automated job application agent",
+        description="LME — Naukri automated job application agent",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
             "Veto examples:\n"

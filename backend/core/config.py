@@ -1,5 +1,5 @@
 """
-Centralized Configuration Manager for NopeRi / Naukri Job Automation.
+Centralized Configuration Manager for LME / Naukri Job Automation.
 Reads/writes: config.json, veto.json, user_prompt.md, and .env.
 """
 from __future__ import annotations
@@ -329,8 +329,8 @@ class ConfigManager:
         return {
             "Authorization": f"Bearer {self.get_ai_key()}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://github.com/Traverser25/NopeRi",
-            "X-Title": "NopeRi",
+            "HTTP-Referer": "https://github.com/praveen9392/LME",
+            "X-Title": "LME",
         }
 
     def get_telegram_credentials(self) -> tuple[str, str]:

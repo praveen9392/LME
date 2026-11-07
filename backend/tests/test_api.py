@@ -1,5 +1,5 @@
 """
-Change-detection smoke tests for NopeRi.
+Change-detection smoke tests for LME.
 
 Run:  pytest tests/ -v
 Run (skip live network):  pytest tests/ -v -m "not live"

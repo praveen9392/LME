@@ -162,6 +162,6 @@ pytest tests/ -v
 
 ## 7. Logs & Troubleshooting
 
-- **Log File Location**: `logs/noperi.log` (automatically created and rotated).
+- **Log File Location**: `backend/logs/app.log` (automatically created and rotated).
 - **Console Output**: Color-coded, human-readable execution status.
 - **Sensitive Data**: Passwords, bearer tokens, and API keys are automatically redacted from all log outputs.

@@ -1,5 +1,5 @@
 """
-main.py — NopeRi API Sandbox and Demonstration Runner.
+main.py — LME API Sandbox and Demonstration Runner.
 Demonstrates authentication, job search, recommendations, and application workflows.
 """
 from __future__ import annotations

@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="frontend/static/img/logo2.svg" alt="NopeRi" width="680"/>
+  <img src="frontend/static/img/logo2.svg" alt="LME" width="680"/>
 </p>
 
-# NopeRi — Production Job Application Automation Agent
+# LME — Production Job Application Automation Agent
 
 A production-grade, modular, Selenium-free Naukri.com automation agent powered by clean layered architecture, robust browser impersonation, and AI-assisted job matching.
 
@@ -27,7 +27,7 @@ LME/
 │   ├── services/                # ApplicationService, JobMatchingService, ProfileService
 │   ├── storage/                 # AppliedJobsDB (SQLite+CSV), TokenPool, JsonCache
 │   ├── web/                     # Hardened localhost Web Server
-│   ├── logs/                    # Rotating log files (backend/logs/noperi.log)
+│   ├── logs/                    # Rotating log files (backend/logs/app.log)
 │   ├── tests/                   # Backend-specific unit and integration test suite (36 tests)
 │   │   ├── unit/                # Unit tests for config, crypto, filter pipeline, logging
 │   │   └── integration/         # Integration tests for jobs, questionnaire, scheduler
@@ -83,7 +83,7 @@ LME/
 - **Profile Bumping Automation:** Automatically toggles headline whitespace/punctuation to refresh profile recency on recruiter searches without altering visible text.
 - **Background Automation & Safety:** APScheduler daemon with single-instance lock file (`.scheduler.pid`) preventing duplicate workers.
 - **Real-Time Telegram Notifications:** Formatted Markdown alerts for application summaries, score rejections, and critical authentication warnings.
-- **Zero-Credential-Leak Logging:** Rotating file logs (`logs/noperi.log`) with an automated `SecretMaskingFilter` censoring Bearer tokens, Telegram bot tokens, API keys, and passwords.
+- **Zero-Credential-Leak Logging:** Rotating file logs (`backend/logs/app.log`) with an automated `SecretMaskingFilter` censoring Bearer tokens, Telegram bot tokens, API keys, and passwords.
 
 ---
 

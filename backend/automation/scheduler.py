@@ -1,5 +1,5 @@
 """
-NopeRi Background Scheduler Daemon using APScheduler 3.x.
+LME Background Scheduler Daemon using APScheduler 3.x.
 Runs periodic profile freshness refreshes and scheduled job application batches.
 """
 from __future__ import annotations
@@ -165,7 +165,7 @@ def _release_instance_lock() -> None:
 
 def _print_banner(sched: BlockingScheduler, job_labels: List[str]) -> None:
     border = Fore.CYAN + "─" * 60 + Style.RESET_ALL if HAS_COLORAMA else "─" * 60
-    title = Fore.CYAN + Style.BRIGHT + "NopeRi Background Scheduler" + Style.RESET_ALL if HAS_COLORAMA else "NopeRi Background Scheduler"
+    title = Fore.CYAN + Style.BRIGHT + "LME Background Scheduler" + Style.RESET_ALL if HAS_COLORAMA else "LME Background Scheduler"
     print(f"\n{border}\n  {title}\n{border}")
     for job in sched.get_jobs():
         bullet = (Fore.WHITE + "●" + Style.RESET_ALL) if HAS_COLORAMA else "●"

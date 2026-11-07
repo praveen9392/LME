@@ -1,5 +1,5 @@
 """
-Playwright End-to-End Test Suite for NopeRi Local Web UI.
+Playwright End-to-End Test Suite for LME Local Web UI.
 Verifies setup wizard navigation, pre-filling, custom prompt editing, API interactions,
 and analytics dashboard rendering.
 """
@@ -31,7 +31,7 @@ def test_playwright_setup_wizard_end_to_end(local_web_server):
 
         # 1. Load setup wizard
         page.goto(f"{local_web_server}/setup")
-        assert "NopeRi Setup" in page.title()
+        assert "LME Setup" in page.title()
 
         # Wait for page to initialize and fetch config
         page.wait_for_selector("#s2")
@@ -90,7 +90,7 @@ def test_playwright_dashboard_end_to_end(local_web_server):
 
         # Load analytics dashboard
         page.goto(f"{local_web_server}/dashboard")
-        assert "NopeRi Dashboard" in page.title()
+        assert "LME Dashboard" in page.title()
 
         # Verify key analytics stat cards are present
         page.wait_for_selector(".stats")
