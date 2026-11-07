@@ -143,11 +143,18 @@ tests/unit/test_storage.py (2 tests) PASSED                              [100%]
 
 ---
 
-## 4. Next Set of Actions & Roadmap
+## 4. Model Migration to OpenRouter Free & Final Reorganization
 
-1. **Update `README.md`**:
-   - Provide the complete user-facing documentation reflecting the new modular architecture, visual dashboard, and quickstart commands.
-2. **Commit Changes to Git**:
-   - Create a clean git commit on the `main` branch recording all refactored files, keeping `backup/original` preserved.
-3. **Final Delivery Report**:
-   - Provide the final comprehensive deliverable report meeting all 15 points specified in the user prompt.
+1. **Model Migration to `openrouter/free`**:
+   - Replaced paid `openai/gpt-4o-mini` with `openrouter/free` ($0 free model router).
+   - Updated `config.json`, `backend/core/config.py`, and `backend/integrations/ai/client.py`.
+   - Added strict free-model safety check refusing paid models and disabling separately billed API endpoints.
+   - Handled OpenRouter rate limits (HTTP 429) gracefully.
+   - Tested live scoring: returned 92 fit score via OpenRouter free tier at $0 cost.
+
+2. **Directory Cleanups & Redundancy Removal**:
+   - Removed duplicate `backend/pytest.ini` and consolidated test configuration into a single root `pytest.ini` discovering `backend/tests` and `frontend/tests`.
+   - Removed duplicate `backend/veto.json` (source of truth is root `veto.json`).
+   - Removed duplicate `assets/` directory (logo consolidated in `frontend/static/img/logo2.svg`).
+   - Cleaned temporary `.pytest_cache` directories.
+   - All 38 automated tests (36 backend + 2 Playwright frontend E2E) passed with 100% success rate.

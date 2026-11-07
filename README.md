@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo2.svg" alt="NopeRi" width="680"/>
+  <img src="frontend/static/img/logo2.svg" alt="NopeRi" width="680"/>
 </p>
 
 # NopeRi — Production Job Application Automation Agent
@@ -44,14 +44,13 @@ LME/
 │   ├── SCHEDULER_ANALYSIS.md    # Automation & background job audit
 │   ├── SETUP.md                 # Setup, configuration, and verification guide
 │   └── REFACTORING_PROGRESS.md  # Conversation progress, audit log & changes
-├── assets/                      # Brand assets & logos
 ├── apply_agent.py               # Main CLI Application Entry Point
 ├── main.py                      # Developer Sandbox / Testing script
 ├── config.json                  # Application search and profile preferences
 ├── user_prompt.md               # Candidate AI scoring prompt (editable via UI)
 ├── veto.json                    # Blacklisted companies and job titles
 ├── Praveen.pdf                  # Active resume document
-├── pytest.ini                   # Project-wide pytest test discovery configuration
+├── pytest.ini                   # Single project-wide pytest test discovery configuration
 ├── requirements.txt             # Managed Python dependencies
 ├── run.bat                      # Windows launcher script
 ├── .env                         # Local environment secrets (git-ignored)
