@@ -40,8 +40,7 @@ class JobMatchingService:
         "angular", "vue", "ui developer", "ui engineer",
         "android", "ios", "flutter", "mobile", "kotlin", "swift",
         "embedded", "firmware",
-        "ml engineer", "data engineer", "data scientist",
-        "intern", "internship", "lead", "golang", "mlops", "devops",
+        "intern", "internship", "lead",
         "web developer - java technologies",
         "member of technical staff - mts",
     }

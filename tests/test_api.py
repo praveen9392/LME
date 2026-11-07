@@ -62,7 +62,7 @@ def test_job_search_returns_results():
         password=os.getenv("PASSWORD"),
     )
     client.login()
-    jc = NaukriJobApiClient(client.session)
+    jc = NaukriJobApiClient(client)
     jobs = jc.search_jobs("Python developer", "", experience=2, pages=1)
     assert len(jobs) > 0, "Job search returned 0 results — endpoint or auth may have changed"
 
@@ -75,7 +75,7 @@ def test_job_schema_has_required_fields():
         password=os.getenv("PASSWORD"),
     )
     client.login()
-    jc = NaukriJobApiClient(client.session)
+    jc = NaukriJobApiClient(client)
     jobs = jc.search_jobs("Python developer", "", experience=2, pages=1)
     assert jobs, "No jobs returned"
     job = jobs[0]
@@ -95,7 +95,7 @@ def test_recommended_jobs_schema():
         password=os.getenv("PASSWORD"),
     )
     client.login()
-    jc = NaukriJobApiClient(client.session)
+    jc = NaukriJobApiClient(client)
     jobs = jc.get_recommended_jobs(pages=1)
     if not jobs:
         pytest.skip("No recommended jobs returned (empty feed is not a failure)")

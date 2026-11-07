@@ -31,11 +31,16 @@ class ProfileService:
 
     def build_headline(self, profile: dict) -> str:
         """Constructs an optimized recruiter headline string from profile configuration."""
-        role = profile.get("role_focus", "backend").title()
+        role = profile.get("role_focus", "AI/ML Engineer")
+        if "Engineer" in role:
+            role_clean = role
+        else:
+            role_clean = f"{role} Engineer"
         exp = profile.get("experience_years", 2)
         stack = profile.get("tech_stack", [])
-        stack_short = " · ".join(stack[:3]) if stack else "Python · Node.js · AWS"
-        return f"{role} Engineer | {exp}+ YOE | {stack_short}"
+        stack_short = " · ".join(stack[:3]) if stack else "Python · FastAPI · GenAI"
+        hl = f"{role_clean} | {exp}+ YOE | {stack_short}"
+        return hl[:250]
 
     def run_update(self) -> bool:
         """

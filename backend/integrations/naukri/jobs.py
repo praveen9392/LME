@@ -328,7 +328,7 @@ class NaukriJobApiClient:
 
     # ── Job Feeds ───────────────────────────────────────────────────────────
 
-    def get_recommended_jobs(self) -> List[Job]:
+    def get_recommended_jobs(self, pages: Optional[int] = None) -> List[Job]:
         """Fetches personalized job feed based on candidate's Naukri profile."""
         headers = self.auth.build_headers(auth=True)
         res = self.session.post(
@@ -352,20 +352,22 @@ class NaukriJobApiClient:
         keyword: str,
         location: str = "",
         page: int = 1,
+        pages: Optional[int] = None,
         job_age: int = 3,
         experience: int = 2,
         results_per_page: int = 20,
         lat_long: str = "",
     ) -> List[Job]:
         """Searches jobs matching keyword, location, and experience criteria."""
-        seo_key = self._build_seo_key(keyword, location, page)
+        target_page = page if pages is None else pages
+        seo_key = self._build_seo_key(keyword, location, target_page)
         params = {
             "noOfResults": results_per_page,
             "urlType": "search_by_keyword",
             "searchType": "adv",
             "keyword": keyword,
             "k": keyword,
-            "pageNo": page,
+            "pageNo": target_page,
             "experience": experience,
             "jobAge": job_age,
             "nignbevent_src": "jobsearchDeskGNB",

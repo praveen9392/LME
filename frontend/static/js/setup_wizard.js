@@ -391,6 +391,10 @@ async function saveAll() {
   };
 
   try {
+    const customPrompt = document.getElementById("custom-prompt") ? document.getElementById("custom-prompt").value.trim() : "";
+    if (customPrompt) {
+      await post("/api/save-prompt", { prompt: customPrompt });
+    }
     const res = await post("/api/save", config);
     if (res.ok) {
       setMsg(msg, "✓ Configuration successfully saved! You can close this window now.", "ok");
@@ -427,6 +431,11 @@ async function loadConfig() {
     if (serverEnv.has_ai_key) {
       document.getElementById("key-found-badge").hidden = false;
       document.getElementById("key-found-text").textContent = `Key already set in .env (${serverEnv.ai_key_provider})`;
+    }
+
+    if (cfg._prompt) {
+      const promptEl = document.getElementById("custom-prompt");
+      if (promptEl) promptEl.value = cfg._prompt;
     }
 
     const p = cfg.profile || {};

@@ -223,6 +223,11 @@
         <input type="range" id="score-thr" min="0" max="100" value="50" style="width:100%;">
       </div>
       <div class="form-group">
+        <label for="custom-prompt">Candidate AI Scoring Prompt &amp; Resume Profile</label>
+        <textarea id="custom-prompt" style="min-height:140px;font-family:monospace;font-size:12px;line-height:1.4;" placeholder="Candidate background, skills, scoring rules..."></textarea>
+        <span style="font-size:11px;color:var(--fg-m);">Editable prompt used by the AI to score jobs against your resume. Saved to user_prompt.md.</span>
+      </div>
+      <div class="form-group">
         <label for="daily-limit">Max Applications per Run</label>
         <input type="number" id="daily-limit" value="50" min="1" max="500">
       </div>

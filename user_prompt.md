@@ -1,15 +1,21 @@
 ## Candidate Profile
 
-- **Role:** Backend / Fullstack-Backend Developer
-- **Experience:** 2 years, backend-focused
-- **Primary stack:** Node.js, Python, MongoDB, REST APIs, AWS
-- **Secondary stack:** Docker, CI/CD, FastAPI, Flask, Express, Playwright, Selenium,
-  web scraping, n8n, LangChain, RAG, vector DBs
-- **Looking for:** SDE1 or junior-to-mid backend / fullstack-backend roles
-- **Preferred companies:** startups, early-stage product companies, AI/automation teams
-- **Work mode:** remote or hybrid preferred; open to on-site in Bangalore or Hyderabad
-- **Will NOT do:** pure frontend, mobile (Android/iOS/Flutter), ML research,
-  data science, DevOps-only, QA/testing roles
+- **Name:** Bathala Praveenkumar
+- **Role:** Associate Engineer (AI/ML) / Generative AI & Backend Developer
+- **Experience:** 2 years, specializing in AI/ML, Generative AI, and Backend Engineering
+- **Primary stack:** Python, FastAPI, Generative AI, LLMs, RAG (Retrieval-Augmented Generation), LangChain, Vector DBs (FAISS, ChromaDB), REST APIs, SQL, SQLAlchemy, Pydantic
+- **Secondary stack:** Java, Docker, Git, OpenCV, Scikit-learn, Linux, Deep Learning Fundamentals
+- **Certifications:** Google Professional ML Engineer Certification (2025), Microsoft Introduction to Python Programming (2022)
+- **Key Projects:**
+  - AI Agent Registry Platform (structured discovery and registry for reusable AI agents)
+  - Unified Machine Learning Framework (configuration-driven ML architecture)
+  - Unified File Reader (Open-source PyPI library: unified-file-reader)
+  - Enterprise Retrieval-Augmented Generation (RAG) System
+  - Intelligent Video-Based Attendance System (OpenCV & Deep Learning)
+- **Looking for:** AI Engineer, GenAI Developer, ML Engineer, RAG Engineer, or Python Backend Engineer (AI-focused)
+- **Preferred companies:** Startups, early-stage product companies, AI labs, modern tech teams
+- **Work mode:** Remote, hybrid, or on-site in Hyderabad or Bangalore
+- **Will NOT do:** Pure frontend, mobile (Android/iOS/Flutter), pure manual QA/testing, legacy support roles
 
 ---
 
@@ -19,29 +25,29 @@ Score each job 0–100 based on fit. Use these anchors:
 
 | Score | Meaning |
 |-------|---------|
-| 85–100 | Strong match — Node.js or Python is the primary requirement, backend-heavy, startup or product company, 0–3 yrs exp |
-| 65–84  | Good match — backend role with relevant stack, may include some frontend duties |
-| 40–64  | Weak match — partial stack overlap, role is vague, or company is a large IT services firm |
-| 0–39   | Poor match — pure frontend, mobile, ML/DS, DevOps-only, or mismatched seniority |
+| 85–100 | Strong match — Generative AI, LLM, RAG, AI Agent, or Python/FastAPI is a primary requirement, product company or startup, 0–3 yrs exp |
+| 65–84  | Good match — Python Backend, Data Science, or ML Engineering role with relevant stack |
+| 40–64  | Weak match — Generic software engineer, partial stack overlap, or large IT services firm |
+| 0–39   | Poor match — Pure frontend, mobile, DevOps-only, manual QA, or mismatched seniority (5+ yrs) |
 
 ### Boost (+10–15 points)
-- Node.js or Python listed as mandatory skill
-- Startup / product company (not IT services)
+- Mentions Generative AI, LLMs, RAG pipelines, LangChain, AI Agents, or Vector DBs (FAISS/ChromaDB)
+- Python and FastAPI listed as primary backend technologies
+- Startup / product company
 - Remote or hybrid work mode
-- AI, automation, or scraping in the job description
 
 ### Penalise (-10–20 points)
-- React / Angular / Vue listed as the primary skill
+- Frontend (React / Angular / Vue) listed as the primary skill
 - Large IT outsourcing firm (Infosys, TCS, Wipro, Accenture, Cognizant, etc.)
 - Requires 4+ years of experience
-- Primarily DevOps, cloud infra, or QA role
+- Primarily DevOps, cloud infrastructure, or manual QA
 
 ---
 
 ## Notes for the AI
 
-- Treat "Full Stack" roles as valid if the backend side is Node.js or Python.
-- A job that lists both frontend and backend equally scores in the 50–65 range.
+- Treat roles like "AI Engineer", "GenAI Engineer", "Python Developer", "ML Engineer", and "Backend Developer (Python)" as high priority.
+- If the role focuses on Generative AI + Python/FastAPI backend, score 85+.
 - Ignore salary information — do not factor CTC into the score.
-- If the job description is missing or very short, score conservatively (40–55).
+- If the job description is short or vague, score conservatively (45–55).
 - Always return a brief one-line reason with the score.

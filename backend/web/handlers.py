@@ -46,6 +46,8 @@ class WebHandler(BaseHTTPRequestHandler):
             self._serve_static(path)
         elif path == "/api/config":
             self._get_config()
+        elif path == "/api/prompt":
+            self._get_prompt()
         elif path == "/api/dashboard-data":
             self._get_dashboard_data()
         else:
@@ -63,6 +65,8 @@ class WebHandler(BaseHTTPRequestHandler):
             self._handle_cookies(body)
         elif path == "/api/save":
             self._handle_save(body)
+        elif path == "/api/save-prompt":
+            self._handle_save_prompt(body)
         elif path == "/api/install-cron":
             self._handle_install_cron(body)
         elif path == "/api/done":
@@ -89,7 +93,24 @@ class WebHandler(BaseHTTPRequestHandler):
             "cwd": str(Path.cwd()),
             "python": sys.executable,
         }
+        data["_prompt"] = cfg.load_prompt()
         self._json(data)
+
+    def _get_prompt(self) -> None:
+        cfg = ConfigManager()
+        self._json({"prompt": cfg.load_prompt()})
+
+    def _handle_save_prompt(self, body: Dict[str, Any]) -> None:
+        prompt_text = body.get("prompt", "").strip()
+        if not prompt_text:
+            self._json({"ok": False, "error": "Prompt cannot be empty."}, status=400)
+            return
+        try:
+            PROMPT_PATH.write_text(prompt_text, encoding="utf-8")
+            self._json({"ok": True})
+        except Exception as exc:
+            logger.error("Failed to save custom prompt: %s", exc)
+            self._json({"ok": False, "error": str(exc)}, status=500)
 
     def _get_dashboard_data(self) -> None:
         db = AppliedJobsDB()
