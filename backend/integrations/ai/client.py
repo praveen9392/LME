@@ -105,7 +105,11 @@ Return ONLY valid JSON, no explanation outside it:
 Jobs:
 {job_block}
 """
-        model_name = self.cfg.config.get("ai", {}).get("model", "openai/gpt-4o-mini")
+        model_name = self.cfg.config.get("ai", {}).get("model", "openrouter/free")
+        # Enforce free model safety: refuse any paid models
+        if not (model_name.endswith(":free") or model_name == "openrouter/free"):
+            logger.warning("Configured model '%s' is not an OpenRouter free model. Enforcing 'openrouter/free' to prevent billing.", model_name)
+            model_name = "openrouter/free"
         try:
             logger.debug("Requesting AI score batch for %d jobs using model '%s'", len(jobs), model_name)
             res = requests.post(
@@ -119,8 +123,11 @@ Jobs:
                 timeout=90,
             )
 
+            if res.status_code == 429:
+                logger.warning("OpenRouter free tier rate limit encountered (HTTP 429). Skipping batch gracefully.")
+                return {}
             if not res.ok:
-                logger.error("AI API returned HTTP %d: %s", res.status_code, res.text[:200])
+                logger.error("OpenRouter API returned HTTP %d: %s", res.status_code, res.text[:200])
                 return {}
 
             content = res.json()["choices"][0]["message"]["content"]
@@ -178,7 +185,10 @@ Jobs:
             f"{reply_format}"
         )
 
-        model_name = self.cfg.config.get("ai", {}).get("model", "openai/gpt-4o-mini")
+        model_name = self.cfg.config.get("ai", {}).get("model", "openrouter/free")
+        if not (model_name.endswith(":free") or model_name == "openrouter/free"):
+            logger.warning("Configured model '%s' is not an OpenRouter free model. Enforcing 'openrouter/free' to prevent billing.", model_name)
+            model_name = "openrouter/free"
         try:
             res = requests.post(
                 self.cfg.get_ai_url(),
@@ -191,7 +201,11 @@ Jobs:
                 },
                 timeout=30,
             )
+            if res.status_code == 429:
+                logger.warning("OpenRouter free tier rate limit encountered (HTTP 429) during questionnaire answering.")
+                return {}
             if not res.ok:
+                logger.error("OpenRouter API returned HTTP %d for questionnaire: %s", res.status_code, res.text[:200])
                 return {}
             raw = res.json()["choices"][0]["message"]["content"].strip()
             return self._parse_ai_qa_reply(raw, questions)

@@ -9,17 +9,13 @@ const tagSet = new Set(['Node.js', 'Python', 'MongoDB', 'REST APIs', 'AWS', 'Doc
 
 const MODELS = {
   openrouter: [
-    { v: 'anthropic/claude-3.5-haiku', l: 'claude-3.5-haiku — fast + cheap' },
-    { v: 'anthropic/claude-3.5-sonnet', l: 'claude-3.5-sonnet — balanced' },
-    { v: 'anthropic/claude-sonnet-4-5', l: 'claude-sonnet-4-5 — latest' },
-    { v: 'openai/gpt-4o-mini', l: 'gpt-4o-mini — cheapest' },
-    { v: 'openai/gpt-4o', l: 'gpt-4o' },
-    { v: 'google/gemini-2.0-flash-001', l: 'gemini-2.0-flash' },
-    { v: 'meta-llama/llama-3.1-8b-instruct:free', l: 'llama-3.1-8b — FREE' },
+    { v: 'openrouter/free', l: 'openrouter/free — Free Router (Recommended, $0)' },
+    { v: 'meta-llama/llama-3.1-8b-instruct:free', l: 'llama-3.1-8b:free — $0' },
+    { v: 'mistralai/mistral-7b-instruct:free', l: 'mistral-7b:free — $0' },
+    { v: 'google/gemma-2-9b-it:free', l: 'gemma-2-9b:free — $0' },
   ],
   openai: [
-    { v: 'gpt-4o-mini', l: 'gpt-4o-mini — cheapest' },
-    { v: 'gpt-4o', l: 'gpt-4o' },
+    { v: 'openrouter/free', l: 'openrouter/free — Free Router (Recommended, $0)' },
   ]
 };
 

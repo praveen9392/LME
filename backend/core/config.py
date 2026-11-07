@@ -39,8 +39,8 @@ DEFAULT_CONFIG: Dict[str, Any] = {
         "resume_path": "",
     },
     "ai": {
-        "provider": "openrouter",  # "openrouter" | "openai"
-        "model": "openai/gpt-4o-mini",
+        "provider": "openrouter",
+        "model": "openrouter/free",
         "score_threshold": 50,
         "daily_apply_limit": 50,
         "ai_score_limit": 300,
@@ -318,26 +318,20 @@ class ConfigManager:
         return base64.b64encode(secrets.token_bytes(48)).decode("utf-8")
 
     def get_ai_url(self) -> str:
-        provider = self.config.get("ai", {}).get("provider", "openrouter").lower()
-        if provider == "openrouter":
-            return OPENROUTER_COMPLETIONS_URL
-        return OPENAI_COMPLETIONS_URL
+        """Returns OpenRouter completion endpoint. Paid endpoints are disabled."""
+        return OPENROUTER_COMPLETIONS_URL
 
     def get_ai_key(self) -> str:
-        provider = self.config.get("ai", {}).get("provider", "openrouter").lower()
-        if provider == "openrouter":
-            return os.getenv("OPENROUTER_API_KEY", "").strip() or os.getenv("OPEN_API_KEY", "").strip()
-        return os.getenv("OPEN_API_KEY", "").strip() or os.getenv("OPENROUTER_API_KEY", "").strip()
+        """Retrieves OpenRouter API key from .env."""
+        return os.getenv("OPENROUTER_API_KEY", "").strip() or os.getenv("OPEN_API_KEY", "").strip()
 
     def get_ai_headers(self) -> dict:
-        headers = {
+        return {
             "Authorization": f"Bearer {self.get_ai_key()}",
             "Content-Type": "application/json",
+            "HTTP-Referer": "https://github.com/Traverser25/NopeRi",
+            "X-Title": "NopeRi",
         }
-        if self.config.get("ai", {}).get("provider", "openrouter").lower() == "openrouter":
-            headers["HTTP-Referer"] = "https://github.com/Traverser25/NopeRi"
-            headers["X-Title"] = "NopeRi"
-        return headers
 
     def get_telegram_credentials(self) -> tuple[str, str]:
         token = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
