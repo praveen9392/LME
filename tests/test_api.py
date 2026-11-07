@@ -24,7 +24,7 @@ live = pytest.mark.skipif(not _HAS_CREDS, reason="NAUKRI_USERNAME / PASSWORD not
 # ---------------------------------------------------------------------------
 
 def test_vid_token_generates():
-    from src.utils.vid_generator import generate_vid
+    from backend.integrations.naukri.crypto import generate_vid
     try:
         vid = generate_vid()
         assert isinstance(vid, str) and len(vid) > 10, "vid token looks wrong"
@@ -37,10 +37,10 @@ def test_vid_token_generates():
 
 @live
 def test_login_returns_nauk_at():
-    from src.client.naukri_client import NaukriLoginClient
-    client = NaukriLoginClient(
-        os.getenv("NAUKRI_USERNAME"),
-        os.getenv("PASSWORD"),
+    from backend.integrations.naukri.auth import NaukriAuthClient
+    client = NaukriAuthClient(
+        username=os.getenv("NAUKRI_USERNAME"),
+        password=os.getenv("PASSWORD"),
     )
     client.login()
     nauk_at = client.session.cookies.get("nauk_at")
@@ -55,27 +55,27 @@ REQUIRED_JOB_FIELDS = ["job_id", "title", "company", "location"]
 
 @live
 def test_job_search_returns_results():
-    from src.client.naukri_client import NaukriLoginClient
-    from src.client.job_client import JobClient
-    client = NaukriLoginClient(
-        os.getenv("NAUKRI_USERNAME"),
-        os.getenv("PASSWORD"),
+    from backend.integrations.naukri.auth import NaukriAuthClient
+    from backend.integrations.naukri.jobs import NaukriJobApiClient
+    client = NaukriAuthClient(
+        username=os.getenv("NAUKRI_USERNAME"),
+        password=os.getenv("PASSWORD"),
     )
     client.login()
-    jc = JobClient(client.session)
+    jc = NaukriJobApiClient(client.session)
     jobs = jc.search_jobs("Python developer", "", experience=2, pages=1)
     assert len(jobs) > 0, "Job search returned 0 results — endpoint or auth may have changed"
 
 @live
 def test_job_schema_has_required_fields():
-    from src.client.naukri_client import NaukriLoginClient
-    from src.client.job_client import JobClient
-    client = NaukriLoginClient(
-        os.getenv("NAUKRI_USERNAME"),
-        os.getenv("PASSWORD"),
+    from backend.integrations.naukri.auth import NaukriAuthClient
+    from backend.integrations.naukri.jobs import NaukriJobApiClient
+    client = NaukriAuthClient(
+        username=os.getenv("NAUKRI_USERNAME"),
+        password=os.getenv("PASSWORD"),
     )
     client.login()
-    jc = JobClient(client.session)
+    jc = NaukriJobApiClient(client.session)
     jobs = jc.search_jobs("Python developer", "", experience=2, pages=1)
     assert jobs, "No jobs returned"
     job = jobs[0]
@@ -88,14 +88,14 @@ def test_job_schema_has_required_fields():
 
 @live
 def test_recommended_jobs_schema():
-    from src.client.naukri_client import NaukriLoginClient
-    from src.client.job_client import JobClient
-    client = NaukriLoginClient(
-        os.getenv("NAUKRI_USERNAME"),
-        os.getenv("PASSWORD"),
+    from backend.integrations.naukri.auth import NaukriAuthClient
+    from backend.integrations.naukri.jobs import NaukriJobApiClient
+    client = NaukriAuthClient(
+        username=os.getenv("NAUKRI_USERNAME"),
+        password=os.getenv("PASSWORD"),
     )
     client.login()
-    jc = JobClient(client.session)
+    jc = NaukriJobApiClient(client.session)
     jobs = jc.get_recommended_jobs(pages=1)
     if not jobs:
         pytest.skip("No recommended jobs returned (empty feed is not a failure)")

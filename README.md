@@ -74,7 +74,6 @@ LME/
 │   ├── unit/                    # Unit tests for config, crypto, filters, logging, storage
 │   └── integration/             # Integration tests for pipeline, scheduler, web server
 ├── cron/                        # Backward-compatible scheduling entry points
-├── src/                         # Backward-compatible shims for legacy imports
 ├── apply_agent.py               # Main CLI Entry Point
 ├── requirements.txt             # Managed Python dependencies
 ├── pytest.ini                   # Pytest path and execution configuration
